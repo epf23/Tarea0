@@ -1,6 +1,9 @@
 #Importar Clases
 from tkinter import *
 from tkinter.filedialog import askopenfilename
+from tkinter import messagebox
+#Importar Clases
+
 #Inicializar variables
 txtvar1=""
 txtvar2=""
@@ -22,19 +25,20 @@ Monto=""
 Motivo=""
 Cantidad_Transacciones=""
 Monto_Total=""
-nombre_archivo=""
-s=""
-
+#Inicializar variables
 
 window=Tk()
-def Elegir_Archivo():
-    nombre_archivo = askopenfilename()
-    archivo = open(nombre_archivo, "r")
-    string_archivo = archivo.readline()
-    s= string_archivo.split(",")
-    return (s)
+window.title("Programa Pull")
+messagebox.showinfo("Programa Pull", "Elija el archivo que desee utilizar.")
 
-valores=Elegir_Archivo()
+#Selección de Archivo
+nombre_archivo = askopenfilename()
+obj_Archivo = open(nombre_archivo,"r")
+string_archivo = obj_Archivo.readline()
+s= string_archivo.split(",")
+#Selección de Archivo
+
+#Asignación de Valores
 RNCEmp = s[0]
 Numero_Cuenta_Transferencia = s[1]
 Fecha_Pago = s[2]
@@ -45,9 +49,7 @@ Monto = s[6]
 Motivo = s[7]
 Cantidad_Transacciones = s[8]
 Monto_Total = s[9]
-
-b1=Button(window, text="Elegir archivo", command=Elegir_Archivo)
-b1.grid(row=1,column=0)
+#Asignación de Valores
 
 ## Encabezado
 l1=Label(window, text="Encabezado", font='Timesnewroman 11 bold')
@@ -56,7 +58,7 @@ l1.grid(row=2,column=0)
 name1=Entry(window, textvariable=txtvar1, font='Timesnewroman 9 bold')
 name1.grid(row=3,column=1)
 name1.insert(0, RNCEmp)
-
+name1.config(state='disabled')
 l2=Label(window, text="RNC De la empresa")
 l2.grid(row=3,column=0)
 #Número de Cuenta
@@ -80,6 +82,8 @@ name4.insert(0, Fecha_Transferencia)
 name4.config(state='disabled')
 l5=Label(window, text="Fecha de Transferencia")
 l5.grid(row=6,column=0)
+## Encabezado
+
 ## Detalle
 l6=Label(window, text="Detalle", font='Timesnewroman 11 bold')
 l6.grid(row=7,column=0)
@@ -111,6 +115,8 @@ name8.insert(0, Motivo)
 name8.config(state='disabled')
 l10=Label(window, text="Motivo")
 l10.grid(row=11,column=0)
+## Detalle
+
 ## Sumario
 l11=Label(window, text="Sumario", font='Timesnewroman 11 bold')
 l11.grid(row=12,column=0)
@@ -128,5 +134,6 @@ name10.insert(0, Monto_Total)
 name10.config(state='disabled')
 l13=Label(window, text="Monto Total")
 l13.grid(row=14,column=0)
+## Sumario
 
 window.mainloop()
